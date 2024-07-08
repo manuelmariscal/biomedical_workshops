@@ -1,9 +1,7 @@
-### `README.md`
-
-```markdown
 # Biomedical Workshops: Gait Analysis for Biomedical Engineers
 
 ## Descripción
+
 Este repositorio contiene el código y los recursos necesarios para realizar un taller sobre el análisis de la marcha utilizando visión por computadora. Los participantes aprenderán a capturar y analizar los movimientos de la marcha en tiempo real utilizando herramientas como TensorFlow y MediaPipe.
 
 ## Estructura del Repositorio
