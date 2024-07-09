@@ -1,89 +1,109 @@
-# Biomedical Workshops: Gait Analysis for Biomedical Engineers
+# Biomedical Workshops
 
-## Descripción
+## Real-time Gait Analysis for Biomedical Engineers
 
-Este repositorio contiene el código y los recursos necesarios para realizar un taller sobre el análisis de la marcha utilizando visión por computadora. Los participantes aprenderán a capturar y analizar los movimientos de la marcha en tiempo real utilizando herramientas como TensorFlow y MediaPipe.
+This repository contains a real-time gait analysis tool using video capture and Mediapipe's pose estimation. The tool is designed to help biomedical engineering students track and analyze gait movements using a laptop camera or a connected mobile phone camera. The analysis is performed in real-time, and various metrics such as angular velocity and angular acceleration are calculated and displayed.
 
-## Estructura del Repositorio
+### Features
+
+- Real-time gait analysis using Mediapipe and OpenCV.
+- Capture video from a laptop camera or a mobile phone camera.
+- Extract and track key points of interest (e.g., ankles, knees, hips, shoulders, elbows, wrists, and center of gravity).
+- Calculate and display angular velocities and angular accelerations for each joint.
+- Smooth the data using Savitzky-Golay filter.
+- Save the data to a CSV file for further analysis.
+- Three visualizations:
+  - Real-time skeleton movement with tracked points and lines connecting them.
+  - Trajectories of key points over time.
+  - Fading trails to visualize the pendulum-like movements of each joint.
+
+### Repository Structure
 
 ```bash
 biomedical_workshops/
+├── main.py
 ├── README.md
 ├── requirements.txt
-├── src/
-│   ├── __init__.py
-│   ├── gait_analysis.py
-└── main.py
+└── src/
+    ├── __init__.py
+    ├── capture_video.py
+    └── gait_analysis.py
 ```
 
-## Requisitos
+### Installation
 
-- Python 3.x
-- TensorFlow
-- MediaPipe
-- OpenCV
-- NumPy
-- Matplotlib
-- SciPy
-
-## Instalación
-
-1. Clona este repositorio en tu máquina local:
+1. Clone the repository:
 
     ```bash
-    git clone <URL del repositorio>
+    git clone https://github.com/manuelmariscal/biomedical_workshops.git
     cd biomedical_workshops
     ```
 
-2. Instala las dependencias necesarias:
+2. Create a virtual environment and activate it:
+
+    ```bash
+    python -m venv bioworkshops
+    source bioworkshops/bin/activate  # On Windows, use `bioworkshops\Scripts\activate`
+    ```
+
+3. Install the required dependencies:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-## Uso
+### Usage
 
-### Modo Completo de Análisis de la Marcha
-
-Para capturar video, realizar el seguimiento de la marcha y analizar los datos en tiempo real, ejecuta el siguiente comando:
+To run the real-time gait analysis:
 
 ```bash
 python main.py --source 0
 ```
 
-Proporciona la fuente de video (0 para cámara de laptop, URL para cámara de celular) cuando se te solicite.
+Where `0` is the default source for the laptop camera. You can also use a URL for a mobile phone camera.
 
-### Detalles Técnicos
+#### Arguments
 
-El análisis incluye la captura de datos de movimiento durante 30 segundos, guardando los puntos de interés y visualizando una "movie" del movimiento de los puntos rastreados entre el segundo 5 y el 25, con los siguientes segmentos:
+- `--source`: Video source (0 for laptop camera, URL for mobile camera).
+- `--test`: Use saved data for testing.
 
-- `left_ankle` a `left_knee`
-- `left_knee` a `left_hip`
-- `left_hip` a `center_of_gravity`
-- `center_of_gravity` a `left_shoulder`
-- `left_shoulder` a `left_elbow`
-- `left_elbow` a `left_wrist`
-- `right_ankle` a `right_knee`
-- `right_knee` a `right_hip`
-- `right_hip` a `center_of_gravity`
-- `center_of_gravity` a `right_shoulder`
-- `right_shoulder` a `right_elbow`
-- `right_elbow` a `right_wrist`
+### Data Analysis
 
-Los datos de las posiciones de los puntos se suavizan utilizando un filtro de Savitzky-Golay para reducir el ruido.
+The tool captures the video data and extracts key points of interest, saving the results in a CSV file named `gait_data.csv`. It calculates angular velocities and accelerations for each joint and provides three visualizations:
 
-## Recursos y Material Adicional
+1. **Real-time Skeleton Movement**: Shows the real-time movement of the skeleton with tracked points and lines connecting them.
+2. **Trajectories of Key Points**: Displays the trajectories of key points over time.
+3. **Fading Trails**: Visualizes the pendulum-like movements of each joint with a fading trail effect.
 
-- [Documentación de MediaPipe](https://google.github.io/mediapipe/)
-- [Documentación de OpenCV](https://opencv.org/)
-- [Documentación de TensorFlow](https://www.tensorflow.org/)
+### Example
 
-## Contribuciones
+To run the analysis with a test dataset:
 
-Las contribuciones son bienvenidas. Por favor, abre un issue o envía un pull request con tus mejoras o sugerencias.
+```bash
+python main.py --test
+```
 
-## Licencia
+### Contributing
 
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+Feel free to contribute to this project by opening issues or submitting pull requests. Please ensure your code follows the coding standards and includes tests where applicable.
 
-Este archivo `README.md` proporciona una guía clara y detallada sobre cómo usar los scripts y recursos del repositorio para el taller de análisis de la marcha, así como información técnica adicional sobre el procesamiento y visualización de los datos.
+### License
+
+This project is licensed under the MIT License.
+
+### Acknowledgments
+
+This project uses the following libraries:
+
+- [Mediapipe](https://google.github.io/mediapipe/)
+- [OpenCV](https://opencv.org/)
+- [TensorFlow](https://www.tensorflow.org/)
+- [NumPy](https://numpy.org/)
+- [Matplotlib](https://matplotlib.org/)
+- [SciPy](https://www.scipy.org/)
+
+---
+
+For more information, please visit the [project repository](https://github.com/manuelmariscal/biomedical_workshops).
+
+
