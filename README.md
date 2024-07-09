@@ -13,8 +13,8 @@ biomedical_workshops/
 ├── src/
 │   ├── capture_video.py
 │   ├── gait_tracking.py
-└── notebooks/
-    └── analysis_demo.ipynb
+│   ├── realtime_gait_analysis.py
+└── main.py
 ```
 
 ## Requisitos
@@ -24,13 +24,14 @@ biomedical_workshops/
 - MediaPipe
 - OpenCV
 - NumPy
+- Matplotlib
 
 ## Instalación
 
 1. Clona este repositorio en tu máquina local:
 
     ```bash
-    git clone <https://github.com/manuelmariscal/biomedical_workshops.git>
+    git clone <URL del repositorio>
     cd biomedical_workshops
     ```
 
@@ -42,33 +43,54 @@ biomedical_workshops/
 
 ## Uso
 
-### Captura de Video desde la Cámara
+### Modo de Captura de Video
 
-Para capturar video desde la cámara de tu laptop, ejecuta el siguiente script:
+Para capturar video desde la cámara de tu laptop, ejecuta el siguiente comando:
 
 ```bash
-python src/capture_video.py
+python main.py --mode capture --source 0
+```
+
+Para capturar video desde la cámara de tu celular, proporciona la URL de la cámara:
+
+```bash
+python main.py --mode capture --source <URL>
 ```
 
 Presiona `q` para salir de la visualización.
 
-### Seguimiento de la Marcha en Tiempo Real
+### Modo de Seguimiento de la Marcha
 
-Para realizar el seguimiento de la marcha en tiempo real, ejecuta el siguiente script:
+Para realizar el seguimiento de la marcha en tiempo real, ejecuta el siguiente comando:
 
 ```bash
-python src/gait_tracking.py
+
+python main.py --mode track --source 0
+```
+
+Para usar la cámara de tu celular, proporciona la URL de la cámara:
+
+```bash
+python main.py --mode track --source <URL>
 ```
 
 Presiona `q` para salir de la visualización.
 
-### Análisis en Tiempo Real de la Marcha
+### Modo de Análisis en Tiempo Real de la Marcha
 
-Para realizar un análisis en tiempo real de los datos de la marcha capturados, abre y ejecuta el notebook:
+Para realizar un análisis en tiempo real de los datos de la marcha capturados, ejecuta el siguiente comando:
 
 ```bash
-jupyter notebook notebooks/analysis_demo.ipynb
+python main.py --mode analyze --source 0
 ```
+
+Para usar la cámara de tu celular, proporciona la URL de la cámara:
+
+```bash
+python main.py --mode analyze --source <URL>
+```
+
+Presiona `q` para salir de la visualización.
 
 ## Recursos y Material Adicional
 
