@@ -1,33 +1,17 @@
 import argparse
-from src.capture_video import VideoCapture
-from src.gait_tracking import GaitTracking
-from src.realtime_gait_analysis import RealTimeGaitAnalysis
+from src.gait_analysis import GaitAnalysis
+import os
 
 def main():
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Para suprimir logs de TensorFlow
     parser = argparse.ArgumentParser(description='Gait Analysis for Biomedical Engineers')
-    parser.add_argument('--mode', type=str, choices=['capture', 'track', 'analyze'], required=True,
-                        help='Mode of operation: capture, track, analyze')
-    parser.add_argument('--source', type=str, default='0',
-                        help='Video source: 0 for laptop camera, URL for mobile camera')
-    parser.add_argument('--debug', action='store_true', help='Enable debug mode')
-
+    parser.add_argument('--source', type=str, default='0', help='Video source: 0 for laptop camera, URL for mobile camera')
     args = parser.parse_args()
+    
     source = int(args.source) if args.source.isdigit() else args.source
-
-    if args.debug:
-        print(f"Running in {args.mode} mode with source: {source}")
-
-    if args.mode == 'capture':
-        vc = VideoCapture(source)
-        vc.start_capture()
-    elif args.mode == 'track':
-        gt = GaitTracking(source)
-        gt.start_tracking()
-    elif args.mode == 'analyze':
-        rta = RealTimeGaitAnalysis(source)
-        rta.analyze_gait()
-    else:
-        print("Invalid mode selected")
+    ga = GaitAnalysis(source)
+    ga.run_analysis(duration=30)
+    ga.save_and_display_movie(start_time=5, end_time=25)
 
 if __name__ == "__main__":
     main()
