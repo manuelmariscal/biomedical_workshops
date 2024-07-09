@@ -1,3 +1,4 @@
 bioworkshops
 bioworkshops/*
 __pycache__
+.gitignore
