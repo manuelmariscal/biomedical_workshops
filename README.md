@@ -22,11 +22,10 @@ This repository contains a real-time gait analysis tool using video capture and 
 ```bash
 biomedical_workshops/
 ├── main.py
+├── gait_data.py
 ├── README.md
 ├── requirements.txt
 └── src/
-    ├── __init__.py
-    ├── capture_video.py
     └── gait_analysis.py
 ```
 
