@@ -11,9 +11,8 @@ biomedical_workshops/
 ├── README.md
 ├── requirements.txt
 ├── src/
-│   ├── capture_video.py
-│   ├── gait_tracking.py
-│   ├── realtime_gait_analysis.py
+│   ├── __init__.py
+│   ├── gait_analysis.py
 └── main.py
 ```
 
@@ -25,13 +24,14 @@ biomedical_workshops/
 - OpenCV
 - NumPy
 - Matplotlib
+- SciPy
 
 ## Instalación
 
 1. Clona este repositorio en tu máquina local:
 
     ```bash
-    git clone <https://github.com/manuelmariscal/biomedical_workshops.git>
+    git clone <URL del repositorio>
     cd biomedical_workshops
     ```
 
@@ -43,54 +43,34 @@ biomedical_workshops/
 
 ## Uso
 
-### Modo de Captura de Video
+### Modo Completo de Análisis de la Marcha
 
-Para capturar video desde la cámara de tu laptop, ejecuta el siguiente comando:
-
-```bash
-python main.py --mode capture --source 0
-```
-
-Para capturar video desde la cámara de tu celular, proporciona la URL de la cámara:
+Para capturar video, realizar el seguimiento de la marcha y analizar los datos en tiempo real, ejecuta el siguiente comando:
 
 ```bash
-python main.py --mode capture --source <URL>
+python main.py --source 0
 ```
 
-Presiona `q` para salir de la visualización.
+Proporciona la fuente de video (0 para cámara de laptop, URL para cámara de celular) cuando se te solicite.
 
-### Modo de Seguimiento de la Marcha
+### Detalles Técnicos
 
-Para realizar el seguimiento de la marcha en tiempo real, ejecuta el siguiente comando:
+El análisis incluye la captura de datos de movimiento durante 30 segundos, guardando los puntos de interés y visualizando una "movie" del movimiento de los puntos rastreados entre el segundo 5 y el 25, con los siguientes segmentos:
 
-```bash
+- `left_ankle` a `left_knee`
+- `left_knee` a `left_hip`
+- `left_hip` a `center_of_gravity`
+- `center_of_gravity` a `left_shoulder`
+- `left_shoulder` a `left_elbow`
+- `left_elbow` a `left_wrist`
+- `right_ankle` a `right_knee`
+- `right_knee` a `right_hip`
+- `right_hip` a `center_of_gravity`
+- `center_of_gravity` a `right_shoulder`
+- `right_shoulder` a `right_elbow`
+- `right_elbow` a `right_wrist`
 
-python main.py --mode track --source 0
-```
-
-Para usar la cámara de tu celular, proporciona la URL de la cámara:
-
-```bash
-python main.py --mode track --source <URL>
-```
-
-Presiona `q` para salir de la visualización.
-
-### Modo de Análisis en Tiempo Real de la Marcha
-
-Para realizar un análisis en tiempo real de los datos de la marcha capturados, ejecuta el siguiente comando:
-
-```bash
-python main.py --mode analyze --source 0
-```
-
-Para usar la cámara de tu celular, proporciona la URL de la cámara:
-
-```bash
-python main.py --mode analyze --source <URL>
-```
-
-Presiona `q` para salir de la visualización.
+Los datos de las posiciones de los puntos se suavizan utilizando un filtro de Savitzky-Golay para reducir el ruido.
 
 ## Recursos y Material Adicional
 
@@ -106,4 +86,4 @@ Las contribuciones son bienvenidas. Por favor, abre un issue o envía un pull re
 
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
 
-Este archivo README proporciona una guía clara y detallada sobre cómo usar los scripts y recursos del repositorio para el taller de análisis de la marcha.
+Este archivo `README.md` proporciona una guía clara y detallada sobre cómo usar los scripts y recursos del repositorio para el taller de análisis de la marcha, así como información técnica adicional sobre el procesamiento y visualización de los datos.
