@@ -104,5 +104,3 @@ This project uses the following libraries:
 ---
 
 For more information, please visit the [project repository](https://github.com/manuelmariscal/biomedical_workshops).
-
-
