@@ -1,5 +1,5 @@
 import argparse
-from src.gait_analysis import GaitAnalysis
+from src.analysis_keras import GaitAnalysis
 import os
 
 def main():
