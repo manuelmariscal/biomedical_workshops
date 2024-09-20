@@ -6,6 +6,7 @@ import sys
 
 # Asegurar que el directorio 'src' y el directorio actual están en el path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+
 sys.path.append(os.path.dirname(__file__))
 
 from src.tracking import Tracking
@@ -27,7 +28,9 @@ def main():
     """)
 
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suprimir logs innecesarios de TensorFlow
-
+    # Asegurar que el directorio 'data' existe para almacenar los archivos CSV
+    if not os.path.exists('data'):
+        os.makedirs('data')
     # Configuración de argumentos
     parser = argparse.ArgumentParser(description='Análisis de Movimiento para Ingenieros Biomédicos')
     parser.add_argument('--mode', type=str, choices=['track', 'analyze', 'corr'], default='track',

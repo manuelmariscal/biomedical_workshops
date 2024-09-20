@@ -103,7 +103,12 @@ class Tracking:
                                     self.movement_label = movement
                                 elif time.time() - self.arm_raised_start_time >= 5:
                                     label = "VALIDO" if movement == "derecho" else "INVALIDO"
+                                    # Guardar los datos en un archivo CSV
+                                    # Asegurar que la carpeta 'data' existe
+                                    if not os.path.exists('data'):
+                                        os.makedirs('data')
                                     filename = f"gait_data_{label}_{int(time.time())}.csv"
+                                    filename = os.path.join('data', filename)
                                     print(f"Deteniendo grabación. Movimiento {label}. Guardando datos en {filename}")
                                     self.save_data_to_csv(filename)
                                     self.recording = False
@@ -282,6 +287,9 @@ class Tracking:
         if not self.data:
             print("No hay datos para guardar.")
             return
+        # Asegurar que la carpeta 'data' existe
+        if not os.path.exists('data'):
+            os.makedirs('data')
 
         keys = self.data[0].keys()
         try:
