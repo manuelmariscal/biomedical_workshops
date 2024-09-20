@@ -23,11 +23,11 @@ This repository contains a real-time movement analysis tool using video capture 
 ```bash
 biomedical_workshops/
 ├── main.py
-├── corr.py
 ├── README.md
 ├── requirements.txt
 └── src/
     ├── tracking.py
+    ├── corr.py
     └── analysis.py
 ```
 
