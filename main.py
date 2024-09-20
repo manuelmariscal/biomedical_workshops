@@ -13,6 +13,19 @@ from src.analysis import MovementAnalysis  # Si aún usas MovementAnalysis
 import corr  # Importamos corr.py
 
 def main():
+
+    # ASCII ART de bienvenida
+    print(r"""                                                                            
+    (           (  (                  )         )                  
+    ( )\ (        )\))(   '     (    ( /(      ( /(                  
+    )((_))\   (  ((_)()\ )  (   )(   )\()) (   )\())  (   `  )   (   
+    ((_)_((_)  )\ _(())\_)() )\ (()\ ((_)\  )\ ((_)\   )\  /(/(   )\  
+    | _ )(_) ((_)\ \((_)/ /((_) ((_)| |(_)((_)| |(_) ((_)((_)_\ ((_) 
+    | _ \| |/ _ \ \ \/\/ // _ \| '_|| / / (_-<| ' \ / _ \| '_ \)(_-< 
+    |___/|_|\___/  \_/\_/ \___/|_|  |_\_\ /__/|_||_|\___/| .__/ /__/ 
+                                                        |_|         
+    """)
+
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suprimir logs innecesarios de TensorFlow
 
     # Configuración de argumentos
