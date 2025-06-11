@@ -1,141 +1,158 @@
 # Biomedical Workshops
 
-## Real-time Movement Analysis for Biomedical Engineers
+## Análisis de movimiento en tiempo real
 
-This repository contains a real-time movement analysis tool using video capture and Mediapipe's pose estimation. The tool is designed to help biomedical engineering students track and analyze movements using a laptop camera or a connected mobile phone camera. The analysis can be performed in real-time or on recorded data, and various metrics and visualizations are provided.
+Este repositorio contiene una herramienta para capturar y analizar movimientos utilizando la cámara del equipo o un dispositivo móvil. El seguimiento se realiza con Mediapipe y OpenCV y está orientado a estudiantes e investigadores de Ingeniería Biomédica. Los datos pueden procesarse en tiempo real o de forma posterior a partir de archivos guardados.
 
-### Features
+### Características
 
-- **Real-time movement tracking** using Mediapipe and OpenCV.
-- **Capture video** from a laptop camera or a mobile phone camera.
-- **Extract and track key points** of interest (e.g., ankles, knees, hips, shoulders, elbows, wrists, and center of gravity).
-- **Save tracked data** to CSV files for further analysis.
-- **Analyze movement data** with various analytical tools.
-- **Calculate correlations** between movements.
-- **Visualize correlation matrices** and skeleton heatmaps.
-- **Multiple modes of operation**:
-  - **track**: Capture and track movements in real-time.
-  - **analyze**: Analyze saved movement data.
-  - **corr**: Compute and visualize correlations between movement datasets.
+- **Seguimiento en tiempo real** usando Mediapipe y OpenCV.
+- **Captura de video** desde la cámara del equipo o de un teléfono móvil.
+- **Extracción de puntos clave** (tobillos, rodillas, caderas, hombros, codos, muñecas y centro de gravedad).
+- **Guardado de datos** en archivos CSV para análisis posterior.
+- **Análisis de movimientos** con herramientas de correlación y visualización.
+- **Matriz de correlaciones** y mapas de calor del esqueleto.
+- **Interfaz gráfica opcional** mediante Dash.
+- **Múltiples modos de operación**:
+  - **track**: captura y seguimiento en tiempo real.
+  - **analyze**: análisis de datos previamente guardados.
+  - **corr**: cálculo y visualización de correlaciones entre movimientos.
 
 ### Repository Structure
 
 ```bash
 biomedical_workshops/
-├── main.py
+├── main.py           # interfaz por consola
+├── dash_app.py       # interfaz gráfica con Dash
 ├── README.md
 ├── requirements.txt
+├── tests/            # pruebas automatizadas
 └── src/
     ├── tracking.py
     ├── corr.py
     └── analysis.py
 ```
 
-### Installation
+### Instalación
 
-1. **Clone the repository**:
+1. **Clona el repositorio**:
 
     ```bash
     git clone https://github.com/manuelmariscal/biomedical_workshops.git
     cd biomedical_workshops
     ```
 
-2. **Create a virtual environment** and activate it:
+2. **Crea un entorno virtual** y actívalo:
 
     ```bash
     python -m venv bioworkshops
-    # On Windows:
+    # En Windows:
     bioworkshops\Scripts\activate
-    # On Unix or MacOS:
+    # En Unix o macOS:
     source bioworkshops/bin/activate
     ```
 
-3. **Install the required dependencies**:
+3. **Instala las dependencias**:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-### Usage
+### Uso
 
-The tool operates in different modes: `track`, `analyze`, and `corr`. You can specify the mode using the `--mode` argument.
+La herramienta funciona en tres modos: `track`, `analyze` y `corr`. Puedes elegir el modo con el argumento `--mode`.
 
-#### Tracking Mode (`track`)
+#### Modo de seguimiento (`track`)
 
-To run the real-time movement tracking:
+Para ejecutar el seguimiento en tiempo real:
 
 ```bash
 python main.py --mode track --source 0
 ```
 
-Where `0` is the default source for the laptop camera. You can also use a URL or another device index for a mobile phone camera or an external camera.
+Donde `0` es la cámara por defecto del equipo. También puedes indicar una URL o el índice de otra cámara.
 
-#### Analysis Mode (`analyze`)
+#### Modo de análisis (`analyze`)
 
-To analyze saved movement data:
+Para analizar datos almacenados:
 
 ```bash
 python main.py --mode analyze --data_folder data
 ```
 
-This mode processes the CSV files in the specified `data_folder` and performs analysis, including plotting movements and calculating metrics.
+Este modo procesa los archivos CSV de la carpeta indicada y genera gráficos y métricas.
 
-#### Correlation Mode (`corr`)
+#### Modo de correlación (`corr`)
 
-To compute and visualize correlations between movement datasets:
-
-```bash
-python main.py --mode corr --data_folder data
-```
-
-This mode processes the CSV files in the specified `data_folder`, computes correlation matrices between pairs of datasets, and visualizes the results, including skeleton heatmaps.
-
-#### Arguments
-
-- `--mode`: Mode of operation (`track`, `analyze`, or `corr`).
-- `--source`: Video source (e.g., `0` for laptop camera, URL for mobile camera). Used only in `track` mode.
-- `--data_folder`: Folder where CSV data files are stored. Used in `analyze` and `corr` modes.
-
-### Data Analysis
-
-The tool captures video data and extracts key points of interest, saving the results in CSV files within the specified `data_folder`. It provides various visualizations and analyses, depending on the mode:
-
-1. **Tracking Mode (`track`)**:
-   - **Real-time skeleton movement**: Displays the real-time movement of the skeleton with tracked key points and lines connecting them.
-   - **Data Saving**: Saves the tracked data to CSV files for later analysis.
-
-2. **Analysis Mode (`analyze`)**:
-   - **Movement Plots**: Visualizes the movements from the saved data.
-   - **Animations**: Creates animations comparing valid and invalid movements.
-   - **Correlation Calculations**: Computes correlations between movements.
-
-3. **Correlation Mode (`corr`)**:
-   - **Correlation Matrices**: Generates and displays correlation matrices for each pair of movement datasets.
-   - **Skeleton Heatmaps**: Plots the skeleton with a heatmap based on average keypoint correlations.
-     - **Correct Orientation**: The skeleton is displayed with the correct orientation.
-     - **Enhanced Visualization**: Thicker lines and larger keypoints are used for better visibility.
-     - **Blue Color Map**: A blue color map is used for the heatmap.
-   - **Visualization of Results**: Both the correlation matrices and the skeleton heatmap are displayed simultaneously with appropriate titles.
-
-### Example
-
-To run the tool in `corr` mode and analyze data in the `data` folder:
+Para calcular y visualizar correlaciones entre movimientos:
 
 ```bash
 python main.py --mode corr --data_folder data
 ```
 
-### Contributing
+El programa calcula matrices de correlación y muestra mapas de calor del esqueleto utilizando los archivos CSV encontrados en `data_folder`.
 
-Feel free to contribute to this project by opening issues or submitting pull requests. Please ensure your code follows the coding standards and includes tests where applicable.
+#### Argumentos principales
 
-### License
+- `--mode`: modo de operación (`track`, `analyze` o `corr`).
+- `--source`: fuente de video (por ejemplo `0` para la cámara local). Sólo en el modo `track`.
+- `--data_folder`: carpeta donde se guardan o leen los archivos CSV. Se usa en `analyze` y `corr`.
 
-This project is licensed under the MIT License.
+### Análisis de datos
 
-### Acknowledgments
+La aplicación guarda las coordenadas de los puntos clave en archivos CSV dentro de `data_folder`. A partir de ellos se generan distintas visualizaciones según el modo elegido:
 
-This project uses the following libraries:
+1. **Modo `track`**:
+   - Muestra el esqueleto en tiempo real.
+   - Guarda las coordenadas para revisarlas más adelante.
+
+2. **Modo `analyze`**:
+   - Grafica los movimientos registrados.
+   - Genera animaciones para comparar ejecuciones válidas e inválidas.
+   - Calcula correlaciones entre movimientos.
+
+3. **Modo `corr`**:
+   - Muestra matrices de correlación entre pares de movimientos.
+   - Dibuja un mapa de calor del esqueleto con las correlaciones promedio.
+   - Las gráficas se muestran juntas para facilitar la interpretación.
+
+### Ejemplo rápido
+
+Para ejecutar el modo `corr` analizando los archivos dentro de `data`:
+
+```bash
+python main.py --mode corr --data_folder data
+```
+
+### Interfaz gráfica con Dash
+
+Puedes lanzar una pequeña aplicación web para elegir el modo de ejecución sin utilizar la consola:
+
+```bash
+python dash_app.py
+```
+
+El servidor se inicia en `http://127.0.0.1:8050/` y desde allí podrás seleccionar el modo, la carpeta de datos y el número máximo de frames.
+
+### Ejecutar pruebas
+
+El repositorio incluye pruebas con `pytest`. Para ejecutarlas:
+
+```bash
+pytest
+```
+
+### Contribuciones
+
+¡Se agradecen las contribuciones! Abre un issue o un pull request y procura incluir pruebas cuando sea posible.
+
+### Licencia
+
+Este proyecto está disponible bajo la licencia MIT.
+
+### Agradecimientos
+
+Este proyecto utiliza las siguientes bibliotecas:
 
 - [Mediapipe](https://google.github.io/mediapipe/)
 - [OpenCV](https://opencv.org/)
@@ -146,4 +163,4 @@ This project uses the following libraries:
 
 ---
 
-For more information, please visit the [project repository](https://github.com/manuelmariscal/biomedical_workshops).
+Para más información visita el [repositorio del proyecto](https://github.com/manuelmariscal/biomedical_workshops).
