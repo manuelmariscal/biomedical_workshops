@@ -3,8 +3,8 @@ import cv2
 cap = cv2.VideoCapture(1)  # Usa el índice correcto para DroidCam
 
 # Configurar resolución (ajústalo a las resoluciones disponibles en DroidCam)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1024)  # Ajusta el ancho a 640 o según lo que prefieras
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 768)  # Ajusta la altura a 480 o según lo que prefieras
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1024)  # Ajusta el ancho a 1024 o según lo que prefieras
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 768)  # Ajusta la altura a 768 o según lo que prefieras
 
 if not cap.isOpened():
     print("No se puede abrir la cámara")
