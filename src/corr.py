@@ -279,11 +279,14 @@ def plot_skeleton_heatmap(avg_keypoint_corrs):
     # plt.show()  # No mostrar aún para poder mostrar ambas figuras al mismo tiempo
     return fig  # Retornar la figura
 
-def main(data_folder='data'):
+def main(data_folder='data', max_frames=None):
     global datasets  # Hacer datasets global para usar en otras funciones
     datasets = load_datasets(data_folder)
     if not datasets:
         return
+
+    if max_frames is not None:
+        datasets = [(name, data.iloc[:max_frames]) for name, data in datasets]
 
     # Recortar los conjuntos de datos al tamaño del archivo más pequeño
     datasets = trim_datasets_to_smallest(datasets)
