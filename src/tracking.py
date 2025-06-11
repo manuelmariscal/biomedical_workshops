@@ -13,7 +13,10 @@ class Tracking:
         Inicializa el seguimiento en tiempo real.
         :param source: Fuente de video (0 para cámara de laptop, URL para cámara externa).
         """
-        self.source = int(source) if source.isdigit() else source
+        if isinstance(source, str) and source.isdigit():
+            self.source = int(source)
+        else:
+            self.source = source
         self.cap = None
         self.mp_drawing = mp.solutions.drawing_utils
         self.mp_pose = mp.solutions.pose
