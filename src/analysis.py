@@ -8,11 +8,12 @@ import matplotlib.animation as animation
 import pandas as pd
 
 class MovementAnalysis:
-    def __init__(self, data_folder='data'):
+    def __init__(self, data_folder='data', max_frames=None):
         """
         Inicializa la clase para el análisis de movimientos.
         """
         self.data_folder = data_folder
+        self.max_frames = max_frames
         self.datasets = []
         self.load_datasets()
 
@@ -34,6 +35,8 @@ class MovementAnalysis:
         for file in csv_files:
             data = self.load_data_from_csv(file)
             if data is not None:
+                if self.max_frames is not None:
+                    data = data.iloc[:self.max_frames]
                 basename = os.path.basename(file)
                 # Corregimos el orden de las condiciones
                 if 'INVALIDO' in basename:

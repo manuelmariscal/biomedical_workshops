@@ -39,19 +39,21 @@ def main():
                         help='Fuente de video: 0 para cámara de laptop, URL para cámara externa (solo en modo "track")')
     parser.add_argument('--data_folder', type=str, default='data',
                         help='Carpeta donde se almacenan los archivos CSV de datos (solo en modos "analyze" y "corr")')
+    parser.add_argument('--frames', type=int, default=None,
+                        help='Número máximo de frames a analizar o grabar')
     args = parser.parse_args()
 
     if args.mode == 'track':
         # Ejecutar el código de tracking
         tracking = Tracking(source=args.source)
-        tracking.run_analysis()
+        tracking.run_analysis(max_frames=args.frames)
     elif args.mode == 'analyze':
         # Ejecutar el código de análisis
-        analysis = MovementAnalysis(data_folder=args.data_folder)
+        analysis = MovementAnalysis(data_folder=args.data_folder, max_frames=args.frames)
         analysis.run_analysis()
     elif args.mode == 'corr':
         # Ejecutar el código de correlación utilizando corr.py
-        corr.main(data_folder=args.data_folder)
+        corr.main(data_folder=args.data_folder, max_frames=args.frames)
     else:
         print('Modo no reconocido. Usa "track", "analyze" o "corr".')
 

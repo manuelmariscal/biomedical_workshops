@@ -32,7 +32,7 @@ class Tracking:
         self.movement_label = None
         self.arm_raised_start_time = None
 
-    def run_analysis(self):
+    def run_analysis(self, max_frames=None):
         """
         Realiza el seguimiento en tiempo real.
         """
@@ -42,6 +42,7 @@ class Tracking:
                 raise ValueError("Error al abrir la fuente de video")
 
             with self.mp_pose.Pose(min_detection_confidence=0.6, min_tracking_confidence=0.6) as pose:
+                frame_count = 0
                 while self.cap.isOpened():
                     ret, frame = self.cap.read()
                     if not ret:
@@ -140,6 +141,10 @@ class Tracking:
 
                     key = cv2.waitKey(1) & 0xFF
                     if key == ord('q'):
+                        break
+
+                    frame_count += 1
+                    if max_frames is not None and frame_count >= max_frames:
                         break
 
         except KeyboardInterrupt:
