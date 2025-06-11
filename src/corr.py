@@ -118,6 +118,11 @@ def plot_correlation_matrices(datasets):
     """
     Genera y grafica las matrices de correlación para cada par de movimientos.
     """
+    # Si hay menos de dos datasets no tiene sentido generar las matrices
+    if len(datasets) < 2:
+        print("Se requieren al menos dos conjuntos de datos para calcular las matrices de correlación.")
+        return None
+
     num_pairs = len(datasets) * (len(datasets) - 1) // 2
     cols = 3  # Número de columnas en la matriz de subplots
     rows = (num_pairs + cols - 1) // cols  # Calcular filas necesarias
@@ -285,6 +290,8 @@ def main(data_folder='data'):
 
     # Generar y mostrar las matrices de correlación
     fig_corr_matrices = plot_correlation_matrices(datasets)
+    if fig_corr_matrices is None:
+        return
 
     # Calcular correlaciones promedio por punto clave
     avg_keypoint_corrs = compute_average_keypoint_correlations(datasets)
